@@ -84,13 +84,11 @@ const Third = () => {
                           elem.name === element &&
                           (index > elem.index ? (
                             <>
-                              {elem.index < 4 && (
+                              {elem.index < 4 ? (
                                 <div className="chartGreen">{elem.index}</div>
-                              )}
-                              {3 < elem.index < 7 && (
+                              ) : elem.index < 7 ? (
                                 <div className="chartOrange">{elem.index}</div>
-                              )}
-                              {elem.index > 6 && (
+                              ) : (
                                 <div className="chartRed">{elem.index}</div>
                               )}
                             </>
