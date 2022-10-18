@@ -3,7 +3,10 @@ import { X1, X2, X } from "../constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addMilestone } from "../reducer/milestone";
 import { addChallenge } from "../reducer/challenge";
+import { addFirstTop } from "../reducer/firstTop";
+import { addFirstBottom } from "../reducer/firstBottom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./home.scss";
 
 function getX(i) {
@@ -13,7 +16,8 @@ function getX(i) {
     return parseInt((i - 25) / 5) + 2;
   }
 }
-const Home = () => {
+const First = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [textMile, setTextMile] = useState("");
   const [textChal, setTextChal] = useState("");
@@ -37,14 +41,14 @@ const Home = () => {
 
   const handelMoveTop = (e, row, col) => {
     if (drag) {
-      const temp = components.map((i) => i);
-      if (!temp[row]) {
-        temp[row] = [];
+      const newComponents = components.map((i) => i);
+      if (!newComponents[row]) {
+        newComponents[row] = [];
       }
-      if (!temp[row][col]) {
-        temp[row][col] = [];
+      if (!newComponents[row][col]) {
+        newComponents[row][col] = [];
       }
-      temp[row][col].push(
+      newComponents[row][col].push(
         <button
           className="mileButton"
           draggable="true"
@@ -57,11 +61,12 @@ const Home = () => {
         </button>
       );
       if (draggedItem.row !== -1 && draggedItem.col !== -1) {
-        temp[draggedItem.row][draggedItem.col].splice(0, 1);
+        newComponents[draggedItem.row][draggedItem.col].splice(0, 1);
       }
+      dispatch(addFirstTop({ row, col, name }));
       setDraggedItem({ row: -1, col: -1 });
       setName("");
-      setComponents(temp);
+      setComponents(newComponents);
       setDrag(false);
     }
   };
@@ -99,14 +104,14 @@ const Home = () => {
 
   const handleMoveBottom = (e, row, col) => {
     if (dragBottom) {
-      const temp = componentsBottom.map((i) => i);
-      if (!temp[row]) {
-        temp[row] = [];
+      const newComponents = componentsBottom.map((i) => i);
+      if (!newComponents[row]) {
+        newComponents[row] = [];
       }
-      if (!temp[row][col]) {
-        temp[row][col] = [];
+      if (!newComponents[row][col]) {
+        newComponents[row][col] = [];
       }
-      temp[row][col].push(
+      newComponents[row][col].push(
         <button
           className="chalButton"
           draggable="true"
@@ -119,11 +124,15 @@ const Home = () => {
         </button>
       );
       if (draggedItemBottom.row !== -1 && draggedItemBottom.col !== -1) {
-        temp[draggedItemBottom.row][draggedItemBottom.col].splice(0, 1);
+        newComponents[draggedItemBottom.row][draggedItemBottom.col].splice(
+          0,
+          1
+        );
       }
       setDraggedItemBottom({ row: -1, col: -1 });
+      dispatch(addFirstBottom({ row, col, nameBottom }));
       setNameBottom("");
-      setComponentsBottom(temp);
+      setComponentsBottom(newComponents);
       setDragBottom(false);
     }
   };
@@ -225,6 +234,16 @@ const Home = () => {
           </table>
         </div>
       </div>
+      <div className="chapter">
+        <button
+          className="next"
+          onClick={() => {
+            navigate("/second");
+          }}
+        >
+          THE NEXT CHAPTER
+        </button>
+      </div>
       <div className="bottom">
         <div className="float-right p-5">
           <TextField
@@ -301,4 +320,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default First;

@@ -19,7 +19,8 @@ table {
     height: 38px;
   }
   td {
-    padding: 5px;
+    padding: 0px;
+    margin: 0px;
   }
   tbody {
     background-color: #1c1c1c;
@@ -40,4 +41,39 @@ table {
   margin: 1px;
   width: 100px;
   color: white;
+}
+.chapter {
+  display: flex;
+  padding: 20px;
+  justify-content: flex-end;
+
+  .next {
+    background-color: #24dd1e;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    border-radius: 10px;
+  }
+}
+.chartRed {
+  background-color: red;
+  height: 38px;
+  width: 50px;
+  text-align: center;
+  margin: auto;
+}
+.chartOrange {
+  background-color: orange;
+  height: 38px;
+  width: 50px;
+  text-align: center;
+  margin: auto;
+}
+
+.chartGreen {
+  background-color: green;
+  height: 38px;
+  width: 50px;
+  text-align: center;
+  margin: auto;
 }

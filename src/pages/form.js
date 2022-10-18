@@ -53,7 +53,7 @@ const Form = () => {
       <Button
         onClick={() => {
           dispatch(onSave(data));
-          navigate("/home");
+          navigate("/first");
         }}
         variant="contained"
       >
