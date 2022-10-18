@@ -177,7 +177,7 @@ const Second = () => {
             Add
           </button>
         </div>
-        <div className="float-right p-5">
+        <div className="float-right p-5 w-[20%]">
           {goals &&
             goals.map((element, index) => (
               <button
@@ -251,7 +251,7 @@ const Second = () => {
             Add
           </button>
         </div>
-        <div className="float-right p-5">
+        <div className="float-right p-5 w-[20%]">
           {obstacles &&
             obstacles.map((element, index) => (
               <button

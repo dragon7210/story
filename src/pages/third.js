@@ -85,11 +85,11 @@ const Third = () => {
                           (index > elem.index ? (
                             <>
                               {elem.index < 4 ? (
-                                <div className="chartGreen">{elem.index}</div>
+                                <div className="chartGreen"></div>
                               ) : elem.index < 7 ? (
-                                <div className="chartOrange">{elem.index}</div>
+                                <div className="chartOrange"></div>
                               ) : (
-                                <div className="chartRed">{elem.index}</div>
+                                <div className="chartRed"></div>
                               )}
                             </>
                           ) : (

@@ -1,7 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: [],
+  value: [
+    "Factor A",
+    "Factor B",
+    "Factor C",
+    "Factor D",
+    "Factor E",
+    "Factor F",
+    "Factor G",
+    "Factor H",
+  ],
 };
 
 export const Challenge = createSlice({
@@ -9,7 +18,9 @@ export const Challenge = createSlice({
   initialState,
   reducers: {
     addChallenge: (state, action) => {
-      state.value.push(action.payload);
+      if (state.value.length < 12) {
+        state.value.push(action.payload);
+      }
     },
   },
 });

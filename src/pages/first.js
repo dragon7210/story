@@ -180,7 +180,7 @@ const First = () => {
             Add
           </button>
         </div>
-        <div className="float-right p-5">
+        <div className="float-right p-5 w-[20%]">
           {milestones &&
             milestones.map((element, index) => (
               <button
@@ -202,15 +202,13 @@ const First = () => {
                 <td></td>
                 {temp.map((element) => (
                   <td key={element}>
-                    {element === 1 ? (
-                      <td>18-24years</td>
-                    ) : (
-                      element * 5 +
-                      15 +
-                      "-" +
-                      parseInt(element * 5 + 19) +
-                      "years"
-                    )}
+                    {element === 1
+                      ? "18-24years"
+                      : element * 5 +
+                        15 +
+                        "-" +
+                        parseInt(element * 5 + 19) +
+                        "years"}
                   </td>
                 ))}
               </tr>
@@ -262,7 +260,7 @@ const First = () => {
             Add
           </button>
         </div>
-        <div className="float-right p-5">
+        <div className="float-right p-5 w-[20%]">
           {chalstones &&
             chalstones.map((element, index) => (
               <button
@@ -284,15 +282,13 @@ const First = () => {
                 <td></td>
                 {temp.map((element) => (
                   <td key={element}>
-                    {element === 1 ? (
-                      <td>18-24years</td>
-                    ) : (
-                      element * 5 +
-                      15 +
-                      "-" +
-                      parseInt(element * 5 + 19) +
-                      "years"
-                    )}
+                    {element === 1
+                      ? " 18-24years"
+                      : element * 5 +
+                        15 +
+                        "-" +
+                        parseInt(element * 5 + 19) +
+                        "years"}
                   </td>
                 ))}
               </tr>
