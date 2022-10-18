@@ -20,7 +20,7 @@ const Third = () => {
     if (topName.indexOf(temp) === -1) topName.push(temp);
   });
   SecondBottoms.forEach((element) => {
-    const temp = element.nameBottom;
+    const temp = element.nameBottom + "bottom";
     if (bottomName.indexOf(temp) === -1) bottomName.push(temp);
   });
 
@@ -45,7 +45,6 @@ const Third = () => {
     setDrag(true);
     setName(element);
   };
-
   return (
     <>
       <div className="w-full p-5 text-center">
@@ -69,7 +68,36 @@ const Third = () => {
             {X1.map((element, index) => (
               <tr key={index}>
                 <td>{element}</td>
-                {topName.concat(bottomName).map((element) => (
+                {topName.map((element) => (
+                  <td
+                    key={element}
+                    onMouseOver={(e) => handleValue(e, index)}
+                    draggable="true"
+                    onDragStart={(e) => handleDragStart(e, element)}
+                    onDragOver={handleDragOver}
+                    onDragEnd={handleDragEnd}
+                  >
+                    {ChangeChart.length &&
+                      ChangeChart.map(
+                        (elem) =>
+                          elem.name === element &&
+                          (index > elem.index ? (
+                            <>
+                              {elem.index < 4 ? (
+                                <div className="chartGreen"></div>
+                              ) : elem.index < 7 ? (
+                                <div className="chartOrange"></div>
+                              ) : (
+                                <div className="chartRed"></div>
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          ))
+                      )}
+                  </td>
+                ))}
+                {bottomName.map((element) => (
                   <td
                     key={element}
                     onMouseOver={(e) => handleValue(e, index)}

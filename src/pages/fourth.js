@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { X1, X2, X } from "../constant";
+import { useSelector } from "react-redux";
+import { X1, X } from "../constant";
 
 const Fourth = () => {
   const SecondTops = useSelector((state) => state.SecondTop).value;
