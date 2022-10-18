@@ -59,7 +59,9 @@ const Third = () => {
               ))}
               {bottomName.map((element, index) => (
                 <td key={index}>
-                  <button className="chalButton">{element}</button>
+                  <button className="chalButton">
+                    {element.slice(0, element.length - 6)}
+                  </button>
                 </td>
               ))}
             </tr>
