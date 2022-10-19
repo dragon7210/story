@@ -5,7 +5,7 @@ import { addGoal } from "../reducer/goal";
 import { addObstacle } from "../reducer/obstacle";
 import { addSecondBottom } from "../reducer/secondBottom";
 import { addSecondTop } from "../reducer/secondTop";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./home.scss";
 
@@ -15,6 +15,11 @@ function getX(i) {
   } else {
     return parseInt((i - 25) / 5) + 2;
   }
+}
+function arrayRemove(arr, value) {
+  return arr.filter(function (ele) {
+    return ele !== value;
+  });
 }
 const Second = () => {
   const navigate = useNavigate();
@@ -33,11 +38,21 @@ const Second = () => {
   const [name, setName] = useState("");
   const [nameBottom, setNameBottom] = useState("");
 
-  const goals = useSelector((state) => state.Goal).value;
-  const obstacles = useSelector((state) => state.Obstacle).value;
+  const Goals = useSelector((state) => state.Goal).value;
+  const Obstacles = useSelector((state) => state.Obstacle).value;
+  const [goals, setGoals] = useState(Goals);
+  const [obstacles, setObstacles] = useState(Obstacles);
   const { age } = useSelector((state) => state.Person);
 
   const temp = X.slice(getX(parseInt(age)), X.length);
+
+  useEffect(() => {
+    setGoals(Goals);
+  }, [Goals]);
+
+  useEffect(() => {
+    setObstacles(Obstacles);
+  }, [Obstacles]);
 
   const handelMoveTop = (e, row, col) => {
     if (drag) {
@@ -95,8 +110,9 @@ const Second = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = (event, element) => {
     event.target.style.opacity = 1;
+    handleElement(element);
     setTimeout(() => {
       setName("");
       setDraggedItem({ row: -1, col: -1 });
@@ -154,13 +170,20 @@ const Second = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  const handleDragEndBottom = (event) => {
+  const handleDragEndBottom = (event, element) => {
     event.target.style.opacity = 1;
+    handleElementBottom(element);
     setTimeout(() => {
       setNameBottom("");
       setDraggedItemBottom({ row: -1, col: -1 });
       setDragBottom(false);
     }, 500);
+  };
+  const handleElement = (element) => {
+    setGoals(arrayRemove(goals, element));
+  };
+  const handleElementBottom = (element) => {
+    setObstacles(arrayRemove(obstacles, element));
   };
 
   return (
@@ -192,7 +215,7 @@ const Second = () => {
                 draggable="true"
                 onDragStart={(e) => handleDragStart(e, -1, -1, element)}
                 onDragOver={handleDragOver}
-                onDragEnd={handleDragEnd}
+                onDragEnd={(e) => handleDragEnd(e, element)}
               >
                 {element}
               </button>
@@ -265,7 +288,7 @@ const Second = () => {
                 draggable="true"
                 onDragStart={(e) => handleDragStartBottom(e, -1, -1, element)}
                 onDragOver={handleDragOverBottom}
-                onDragEnd={handleDragEndBottom}
+                onDragEnd={(e) => handleDragEndBottom(e, element)}
               >
                 {element}
               </button>

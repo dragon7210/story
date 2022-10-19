@@ -5,7 +5,7 @@ import { addMilestone } from "../reducer/milestone";
 import { addChallenge } from "../reducer/challenge";
 import { addFirstTop } from "../reducer/firstTop";
 import { addFirstBottom } from "../reducer/firstBottom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./home.scss";
 
@@ -16,6 +16,12 @@ function getX(i) {
     return parseInt((i - 25) / 5) + 2;
   }
 }
+function arrayRemove(arr, value) {
+  return arr.filter(function (ele) {
+    return ele !== value;
+  });
+}
+
 const First = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,9 +38,11 @@ const First = () => {
   const [componentsBottom, setComponentsBottom] = useState([]);
   const [name, setName] = useState("");
   const [nameBottom, setNameBottom] = useState("");
+  const Milestones = useSelector((state) => state.Milestone).value;
+  const Chalstones = useSelector((state) => state.Challenge).value;
 
-  const milestones = useSelector((state) => state.Milestone).value;
-  const chalstones = useSelector((state) => state.Challenge).value;
+  const [milestones, setMilestones] = useState(Milestones);
+  const [chalstones, setChalstones] = useState(Chalstones);
   const { age } = useSelector((state) => state.Person);
 
   const temp = X.slice(0, getX(parseInt(age)));
@@ -72,6 +80,13 @@ const First = () => {
       setDrag(false);
     }
   };
+  useEffect(() => {
+    setMilestones(Milestones);
+  }, [Milestones]);
+
+  useEffect(() => {
+    setChalstones(Chalstones);
+  }, [Chalstones]);
 
   const changeMile = (e) => {
     setTextMile(e.target.value);
@@ -95,7 +110,8 @@ const First = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = (event, element) => {
+    handleElement(element);
     event.target.style.opacity = 1;
     setTimeout(() => {
       setName("");
@@ -156,13 +172,20 @@ const First = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  const handleDragEndBottom = (event) => {
+  const handleDragEndBottom = (event, element) => {
     event.target.style.opacity = 1;
+    handleElementBotton(element);
     setTimeout(() => {
       setNameBottom("");
       setDraggedItemBottom({ row: -1, col: -1 });
       setDragBottom(false);
     }, 500);
+  };
+  const handleElement = (element) => {
+    setMilestones(arrayRemove(milestones, element));
+  };
+  const handleElementBotton = (element) => {
+    setChalstones(arrayRemove(chalstones, element));
   };
 
   return (
@@ -186,19 +209,18 @@ const First = () => {
           </button>
         </div>
         <div className="float-right p-5 w-[350px]">
-          {milestones &&
-            milestones.map((element, index) => (
-              <button
-                className="mileButton"
-                key={index}
-                draggable="true"
-                onDragStart={(e) => handleDragStart(e, -1, -1, element)}
-                onDragOver={handleDragOver}
-                onDragEnd={handleDragEnd}
-              >
-                {element}
-              </button>
-            ))}
+          {milestones.map((element, index) => (
+            <button
+              className="mileButton"
+              key={index}
+              draggable="true"
+              onDragStart={(e) => handleDragStart(e, -1, -1, element)}
+              onDragOver={handleDragOver}
+              onDragEnd={(e) => handleDragEnd(e, element)}
+            >
+              {element}
+            </button>
+          ))}
         </div>
         <div className="w-full p-5 text-center">
           <table>
@@ -273,7 +295,7 @@ const First = () => {
                 draggable="true"
                 onDragStart={(e) => handleDragStartBottom(e, -1, -1, element)}
                 onDragOver={handleDragOverBottom}
-                onDragEnd={handleDragEndBottom}
+                onDragEnd={(e) => handleDragEndBottom(e, element)}
               >
                 {element}
               </button>
