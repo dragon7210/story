@@ -9,15 +9,7 @@ export const ChangeChart = createSlice({
   initialState,
   reducers: {
     addChangeChart: (state, action) => {
-      const { name } = action.payload;
-      const lasts = state.value.filter((item) => item.name === name);
-      if (lasts.length) {
-        state.value = state.value.map((item) =>
-          item.name === name ? { ...action.payload } : { ...item }
-        );
-      } else {
-        state.value.push(action.payload);
-      }
+      return { ...action.payload };
     },
   },
 });

@@ -77,3 +77,27 @@ table {
   text-align: center;
   margin: auto;
 }
+
+.critical {
+  color: red !important;
+}
+
+.warning {
+  color: orange !important;
+}
+
+.normal {
+  color: green !important;
+}
+.MuiSlider-rail {
+  color: #1c1c1c !important;
+}
+.MuiSlider-track {
+  width: 60px !important;
+  border-radius: 0px !important;
+}
+.MuiSlider-thumb {
+  border-radius: 0px !important;
+  width: 60px !important;
+  box-shadow: none !important;
+}

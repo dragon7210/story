@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { X1 } from "../constant";
 import { addChangeChart } from "../reducer/changeChart";
 import { useNavigate } from "react-router-dom";
+import MSlider from "../components/MSlider";
+import Box from "@mui/material/Box";
 
 const Third = () => {
+  const [topValue, setTopValue] = useState({});
+  const [bottomValue, setBottomValue] = useState({});
+
   const SecondTops = useSelector((state) => state.SecondTop).value;
   const SecondBottoms = useSelector((state) => state.SecondBottom).value;
-  const ChangeChart = useSelector((state) => state.ChangeChart).value;
-  const [drag, setDrag] = useState(false);
-  const [name, setName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,28 +25,9 @@ const Third = () => {
     const temp = element.nameBottom + "bottom";
     if (bottomName.indexOf(temp) === -1) bottomName.push(temp);
   });
-
-  const handleValue = (e, index) => {
-    if (drag) {
-      dispatch(addChangeChart({ index: index, name: name }));
-    }
-  };
-  const handleDragOver = (event) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-  };
-
-  const handleDragEnd = (event) => {
-    event.target.style.opacity = 1;
-    setTimeout(() => {
-      setDrag(false);
-    }, 500);
-  };
-
-  const handleDragStart = (event, element) => {
-    setDrag(true);
-    setName(element);
-  };
+  useEffect(() => {
+    dispatch(addChangeChart(Object.assign(topValue, bottomValue)));
+  }, [topValue, bottomValue]);
   return (
     <>
       <div className="w-full p-5 text-center">
@@ -69,69 +52,41 @@ const Third = () => {
             </tr>
           </thead>
           <tbody>
-            {X1.map((element, index) => (
-              <tr key={index}>
-                <td>{element}</td>
-                {topName.map((element) => (
-                  <td
-                    key={element}
-                    onMouseOver={(e) => handleValue(e, index)}
-                    draggable="true"
-                    onDragStart={(e) => handleDragStart(e, element)}
-                    onDragOver={handleDragOver}
-                    onDragEnd={handleDragEnd}
-                  >
-                    {ChangeChart.length > 0 &&
-                      ChangeChart.map(
-                        (elem) =>
-                          elem.name === element &&
-                          (index > elem.index ? (
-                            <>
-                              {elem.index < 4 ? (
-                                <div className="chartGreen"></div>
-                              ) : elem.index < 7 ? (
-                                <div className="chartOrange"></div>
-                              ) : (
-                                <div className="chartRed"></div>
-                              )}
-                            </>
-                          ) : (
-                            ""
-                          ))
-                      )}
-                  </td>
+            <tr>
+              <td>
+                {X1.map((element) => (
+                  <div key={element}>{element}</div>
                 ))}
-                {bottomName.map((element) => (
-                  <td
-                    key={element}
-                    onMouseOver={(e) => handleValue(e, index)}
-                    draggable="true"
-                    onDragStart={(e) => handleDragStart(e, element)}
-                    onDragOver={handleDragOver}
-                    onDragEnd={handleDragEnd}
-                  >
-                    {ChangeChart.length > 0 &&
-                      ChangeChart.map(
-                        (elem) =>
-                          elem.name === element &&
-                          (index > elem.index ? (
-                            <>
-                              {elem.index < 4 ? (
-                                <div className="chartGreen"></div>
-                              ) : elem.index < 7 ? (
-                                <div className="chartOrange"></div>
-                              ) : (
-                                <div className="chartRed"></div>
-                              )}
-                            </>
-                          ) : (
-                            <></>
-                          ))
-                      )}
-                  </td>
-                ))}
-              </tr>
-            ))}
+              </td>
+              {topName.map((element, index) => (
+                <td key={index}>
+                  <Box sx={{ height: 220 }}>
+                    <MSlider
+                      value={topValue[element] ?? 0}
+                      onChange={(e, val) => {
+                        let newTopValue = { ...topValue };
+                        newTopValue[element] = val;
+                        setTopValue(newTopValue);
+                      }}
+                    />
+                  </Box>
+                </td>
+              ))}
+              {bottomName.map((element, index) => (
+                <td key={index}>
+                  <Box sx={{ height: 220 }}>
+                    <MSlider
+                      value={bottomValue[element] ?? 0}
+                      onChange={(e, val) => {
+                        let newBottomValue = { ...bottomValue };
+                        newBottomValue[element] = val;
+                        setBottomValue(newBottomValue);
+                      }}
+                    />
+                  </Box>
+                </td>
+              ))}
+            </tr>
           </tbody>
         </table>
       </div>

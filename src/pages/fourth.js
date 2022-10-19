@@ -8,14 +8,15 @@ const Fourth = () => {
   const SecondBottoms = useSelector((state) => state.SecondBottom).value;
   const FirstTops = useSelector((state) => state.FirstTop).value;
   const FirstBottoms = useSelector((state) => state.FirstBottom).value;
-  const ChangeCharts = useSelector((state) => state.ChangeChart).value;
+  const ChangeCharts = Object.entries(
+    useSelector((state) => state.ChangeChart)
+  );
   useEffect(() => {
     if (ChangeCharts.length !== 0) {
-      let abc = ChangeCharts.map((a) => a);
-      const temp = abc.sort((a, b) => b.index - a.index)[0].name;
-      setLastName(temp);
+      setLastName(ChangeCharts.sort((a, b) => a[1] - b[1])[0][0]);
     }
   }, [ChangeCharts]);
+  console.log(lastName);
   return (
     <>
       <div className="top">
