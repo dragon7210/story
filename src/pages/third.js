@@ -60,7 +60,7 @@ const Third = () => {
               </td>
               {topName.map((element, index) => (
                 <td key={index}>
-                  <Box sx={{ height: 220 }}>
+                  <Box sx={{ height: 240 }}>
                     <MSlider
                       value={topValue[element] ?? 0}
                       onChange={(e, val) => {
@@ -74,7 +74,7 @@ const Third = () => {
               ))}
               {bottomName.map((element, index) => (
                 <td key={index}>
-                  <Box sx={{ height: 220 }}>
+                  <Box sx={{ height: 240 }}>
                     <MSlider
                       value={bottomValue[element] ?? 0}
                       onChange={(e, val) => {
