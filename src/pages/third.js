@@ -34,7 +34,7 @@ const Third = () => {
         <table>
           <thead>
             <tr>
-              <td></td>
+              <td className="w-10"></td>
               {topName.map((element, index) => (
                 <td key={index}>
                   <button className="mileButton">

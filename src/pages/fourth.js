@@ -23,7 +23,7 @@ const Fourth = () => {
           <table>
             <thead>
               <tr>
-                <td></td>
+                <td className="w-10"></td>
                 {X.map((element) => (
                   <td key={element}>
                     {element === 1
@@ -40,7 +40,7 @@ const Fourth = () => {
             <tbody>
               {X1.map((element, rowIndex) => (
                 <tr key={rowIndex}>
-                  <td padding="none">{element}</td>
+                  <td>{element}</td>
                   {X.map((colIndex) => (
                     <td key={colIndex}>
                       {FirstTops.map(
@@ -83,7 +83,7 @@ const Fourth = () => {
           <table>
             <thead>
               <tr>
-                <td></td>
+                <td className="w-10"></td>
                 {X.map((element) => (
                   <td key={element}>
                     {element === 1
@@ -100,7 +100,7 @@ const Fourth = () => {
             <tbody>
               {X1.map((element, rowIndex) => (
                 <tr key={rowIndex}>
-                  <td padding="none">{element}</td>
+                  <td>{element}</td>
                   {X.map((colIndex) => (
                     <td key={colIndex}>
                       {FirstBottoms.map(

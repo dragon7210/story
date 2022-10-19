@@ -204,7 +204,7 @@ const First = () => {
           <table>
             <thead>
               <tr>
-                <td></td>
+                <td className="w-10 text-center"></td>
                 {temp.map((element) => (
                   <td key={element}>
                     {element === 1
@@ -221,11 +221,10 @@ const First = () => {
             <tbody>
               {X1.map((element, index) => (
                 <tr key={index}>
-                  <td padding="none">{element}</td>
+                  <td>{element}</td>
                   {temp.map((element) => (
                     <td
                       key={element}
-                      padding="none"
                       onMouseOver={(e) => handelMoveTop(e, index, element)}
                     >
                       {components?.[index]?.[element]?.map((i) => i)}
@@ -284,7 +283,7 @@ const First = () => {
           <table>
             <thead>
               <tr>
-                <td></td>
+                <td className="w-10"></td>
                 {temp.map((element) => (
                   <td key={element}>
                     {element === 1
@@ -301,11 +300,10 @@ const First = () => {
             <tbody>
               {X2.map((element, index) => (
                 <tr key={index}>
-                  <td padding="none">{element}</td>
+                  <td>{element}</td>
                   {temp.map((element) => (
                     <td
                       key={element}
-                      padding="none"
                       onMouseOver={(e) => handleMoveBottom(e, index, element)}
                     >
                       {componentsBottom?.[index]?.[element]?.map((i) => i)}
