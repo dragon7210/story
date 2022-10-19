@@ -18,11 +18,11 @@ const Third = () => {
   const topName = [];
   const bottomName = [];
   SecondTops.forEach((element) => {
-    const temp = element.name + "top";
+    const temp = element.name;
     if (topName.indexOf(temp) === -1) topName.push(temp);
   });
   SecondBottoms.forEach((element) => {
-    const temp = element.nameBottom + "bottom";
+    const temp = element.nameBottom;
     if (bottomName.indexOf(temp) === -1) bottomName.push(temp);
   });
   useEffect(() => {

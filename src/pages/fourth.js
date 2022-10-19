@@ -16,7 +16,6 @@ const Fourth = () => {
       setLastName(ChangeCharts.sort((a, b) => a[1] - b[1])[0][0]);
     }
   }, [ChangeCharts]);
-  console.log(lastName);
   return (
     <>
       <div className="top">
@@ -44,7 +43,7 @@ const Fourth = () => {
                   <td padding="none">{element}</td>
                   {X.map((colIndex) => (
                     <td key={colIndex}>
-                      {FirstTops.concat(SecondTops).map(
+                      {FirstTops.map(
                         (element1) =>
                           element1.col === colIndex &&
                           element1.row === rowIndex && (
@@ -52,12 +51,21 @@ const Fourth = () => {
                               <button className="mileButton">
                                 {element1.name}
                               </button>
-                              {lastName.slice(0, lastName.length - 3) ===
-                              element1.name ? (
-                                "flag"
-                              ) : (
-                                <></>
-                              )}
+                            </>
+                          )
+                      )}
+                      {SecondTops.map(
+                        (element1) =>
+                          element1.col === colIndex &&
+                          element1.row === rowIndex && (
+                            <>
+                              <button className="mileButton">
+                                {element1.name.slice(
+                                  0,
+                                  element1.name.length - 3
+                                )}
+                              </button>
+                              {lastName === element1.name ? "flag" : <></>}
                             </>
                           )
                       )}
@@ -95,7 +103,7 @@ const Fourth = () => {
                   <td padding="none">{element}</td>
                   {X.map((colIndex) => (
                     <td key={colIndex}>
-                      {FirstBottoms.concat(SecondBottoms).map(
+                      {FirstBottoms.map(
                         (element1) =>
                           element1.col === colIndex &&
                           element1.row === rowIndex && (
@@ -103,8 +111,21 @@ const Fourth = () => {
                               <button className="chalButton">
                                 {element1.nameBottom}
                               </button>
-                              {lastName.slice(0, lastName.length - 6) ===
-                              element1.nameBottom ? (
+                            </>
+                          )
+                      )}
+                      {SecondBottoms.map(
+                        (element1) =>
+                          element1.col === colIndex &&
+                          element1.row === rowIndex && (
+                            <>
+                              <button className="chalButton">
+                                {element1.nameBottom.slice(
+                                  0,
+                                  element1.nameBottom.length - 6
+                                )}
+                              </button>
+                              {lastName === element1.nameBottom ? (
                                 "flag"
                               ) : (
                                 <></>

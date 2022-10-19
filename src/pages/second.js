@@ -65,7 +65,7 @@ const Second = () => {
       if (draggedItem.row !== -1 && draggedItem.col !== -1) {
         temp[draggedItem.row][draggedItem.col].splice(0, 1);
       }
-      dispatch(addSecondTop({ row, col, name }));
+      dispatch(addSecondTop({ row, col, name: name + "top" }));
       setDraggedItem({ row: -1, col: -1 });
       setName("");
       setComponents(temp);
@@ -130,7 +130,9 @@ const Second = () => {
       if (draggedItemBottom.row !== -1 && draggedItemBottom.col !== -1) {
         temp[draggedItemBottom.row][draggedItemBottom.col].splice(0, 1);
       }
-      dispatch(addSecondBottom({ row, col, nameBottom }));
+      dispatch(
+        addSecondBottom({ row, col, nameBottom: nameBottom + "bottom" })
+      );
       setDraggedItemBottom({ row: -1, col: -1 });
       setNameBottom("");
       setComponentsBottom(temp);
