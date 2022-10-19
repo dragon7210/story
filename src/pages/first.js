@@ -48,18 +48,20 @@ const First = () => {
       if (!newComponents[row][col]) {
         newComponents[row][col] = [];
       }
-      newComponents[row][col].push(
-        <button
-          className="mileButton"
-          draggable="true"
-          onDragStart={(e) => handleDragStart(e, row, col, name)}
-          onDragOver={handleDragOver}
-          onDragEnd={handleDragEnd}
-          key={e}
-        >
-          {name}
-        </button>
-      );
+      if (newComponents[row][col].length === 0) {
+        newComponents[row][col].push(
+          <button
+            className="mileButton"
+            draggable="true"
+            onDragStart={(e) => handleDragStart(e, row, col, name)}
+            onDragOver={handleDragOver}
+            onDragEnd={handleDragEnd}
+            key={e}
+          >
+            {name}
+          </button>
+        );
+      }
       if (draggedItem.row !== -1 && draggedItem.col !== -1) {
         newComponents[draggedItem.row][draggedItem.col].splice(0, 1);
       }
@@ -111,18 +113,21 @@ const First = () => {
       if (!newComponents[row][col]) {
         newComponents[row][col] = [];
       }
-      newComponents[row][col].push(
-        <button
-          className="chalButton"
-          draggable="true"
-          onDragStart={(e) => handleDragStartBottom(e, row, col, name)}
-          onDragOver={handleDragOverBottom}
-          onDragEnd={handleDragEndBottom}
-          key={e}
-        >
-          {nameBottom}
-        </button>
-      );
+      if (newComponents[row][col].length === 0) {
+        newComponents[row][col].push(
+          <button
+            className="chalButton"
+            draggable="true"
+            onDragStart={(e) => handleDragStartBottom(e, row, col, name)}
+            onDragOver={handleDragOverBottom}
+            onDragEnd={handleDragEndBottom}
+            key={e}
+          >
+            {nameBottom}
+          </button>
+        );
+      }
+
       if (draggedItemBottom.row !== -1 && draggedItemBottom.col !== -1) {
         newComponents[draggedItemBottom.row][draggedItemBottom.col].splice(
           0,
@@ -180,7 +185,7 @@ const First = () => {
             Add
           </button>
         </div>
-        <div className="float-right p-5 w-[20%]">
+        <div className="float-right p-5 w-[350px]">
           {milestones &&
             milestones.map((element, index) => (
               <button
@@ -260,7 +265,7 @@ const First = () => {
             Add
           </button>
         </div>
-        <div className="float-right p-5 w-[20%]">
+        <div className="float-right p-5 w-[350px]">
           {chalstones &&
             chalstones.map((element, index) => (
               <button
