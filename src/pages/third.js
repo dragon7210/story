@@ -16,7 +16,7 @@ const Third = () => {
   const topName = [];
   const bottomName = [];
   SecondTops.forEach((element) => {
-    const temp = element.name;
+    const temp = element.name + "top";
     if (topName.indexOf(temp) === -1) topName.push(temp);
   });
   SecondBottoms.forEach((element) => {
@@ -54,7 +54,9 @@ const Third = () => {
               <td></td>
               {topName.map((element, index) => (
                 <td key={index}>
-                  <button className="mileButton">{element}</button>
+                  <button className="mileButton">
+                    {element.slice(0, element.length - 3)}
+                  </button>
                 </td>
               ))}
               {bottomName.map((element, index) => (
@@ -79,7 +81,7 @@ const Third = () => {
                     onDragOver={handleDragOver}
                     onDragEnd={handleDragEnd}
                   >
-                    {ChangeChart.length &&
+                    {ChangeChart.length > 0 &&
                       ChangeChart.map(
                         (elem) =>
                           elem.name === element &&
@@ -94,7 +96,7 @@ const Third = () => {
                               )}
                             </>
                           ) : (
-                            <></>
+                            ""
                           ))
                       )}
                   </td>
@@ -108,7 +110,7 @@ const Third = () => {
                     onDragOver={handleDragOver}
                     onDragEnd={handleDragEnd}
                   >
-                    {ChangeChart.length &&
+                    {ChangeChart.length > 0 &&
                       ChangeChart.map(
                         (elem) =>
                           elem.name === element &&

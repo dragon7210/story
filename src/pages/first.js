@@ -163,7 +163,7 @@ const First = () => {
   return (
     <>
       <div className="top">
-        <div className="float-right p-5">
+        <div className="float-right p-5 w-[170px]">
           <TextField
             id="outlined-basic"
             label="Milestone"
@@ -174,7 +174,7 @@ const First = () => {
           <button
             className="addButton"
             onClick={() => {
-              dispatch(addMilestone(textMile));
+              textMile && dispatch(addMilestone(textMile));
             }}
           >
             Add
@@ -243,7 +243,7 @@ const First = () => {
         </button>
       </div>
       <div className="bottom">
-        <div className="float-right p-5">
+        <div className="float-right p-5 w-[170px]">
           <TextField
             id="outlined-basic"
             label="Challenge"
@@ -254,7 +254,7 @@ const First = () => {
           <button
             className="addButton"
             onClick={() => {
-              dispatch(addChallenge(textChal));
+              textChal && dispatch(addChallenge(textChal));
             }}
           >
             Add

@@ -51,7 +51,12 @@ const Fourth = () => {
                               <button className="mileButton">
                                 {element1.name}
                               </button>
-                              {lastName === element1.name ? "flag" : <></>}
+                              {lastName.slice(0, lastName.length - 3) ===
+                              element1.name ? (
+                                "flag"
+                              ) : (
+                                <></>
+                              )}
                             </>
                           )
                       )}
