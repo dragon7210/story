@@ -76,6 +76,7 @@ const Second = () => {
             {name}
           </button>
         );
+        handleElement(name);
       }
       if (draggedItem.row !== -1 && draggedItem.col !== -1) {
         temp[draggedItem.row][draggedItem.col].splice(0, 1);
@@ -141,6 +142,7 @@ const Second = () => {
             {nameBottom}
           </button>
         );
+        handleElementBottom(nameBottom);
       }
       if (draggedItemBottom.row !== -1 && draggedItemBottom.col !== -1) {
         temp[draggedItemBottom.row][draggedItemBottom.col].splice(0, 1);
