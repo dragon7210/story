@@ -251,6 +251,7 @@ const Second = () => {
                   <td>{element}</td>
                   {temp.map((element) => (
                     <td
+                      style={{ width: "110px" }}
                       key={element}
                       onMouseOver={(e) => handelMoveTop(e, index, element)}
                     >
@@ -306,7 +307,7 @@ const Second = () => {
               <tr>
                 <td className="w-10"></td>
                 {temp.map((element) => (
-                  <td key={element}>
+                  <td style={{ width: "110px" }} key={element}>
                     {element === 1
                       ? "18-24years"
                       : element * 5 +
