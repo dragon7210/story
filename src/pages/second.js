@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import { X1, X2, X } from "../constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addGoal } from "../reducer/goal";
-import { addObstacle } from "../reducer/obstacle";
+import { addGoal, removeGoal } from "../reducer/goal";
+import { addObstacle, removeObstacle } from "../reducer/obstacle";
 import { addSecondBottom } from "../reducer/secondBottom";
 import { addSecondTop } from "../reducer/secondTop";
 import { useState, useEffect } from "react";
@@ -110,9 +110,8 @@ const Second = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  const handleDragEnd = (event, element) => {
+  const handleDragEnd = (event) => {
     event.target.style.opacity = 1;
-    handleElement(element);
     setTimeout(() => {
       setName("");
       setDraggedItem({ row: -1, col: -1 });
@@ -134,7 +133,7 @@ const Second = () => {
           <button
             className="chalButton"
             draggable="true"
-            onDragStart={(e) => handleDragStartBottom(e, row, col, name)}
+            onDragStart={(e) => handleDragStartBottom(e, row, col, nameBottom)}
             onDragOver={handleDragOverBottom}
             onDragEnd={handleDragEndBottom}
             key={e}
@@ -170,9 +169,8 @@ const Second = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  const handleDragEndBottom = (event, element) => {
+  const handleDragEndBottom = (event) => {
     event.target.style.opacity = 1;
-    handleElementBottom(element);
     setTimeout(() => {
       setNameBottom("");
       setDraggedItemBottom({ row: -1, col: -1 });
@@ -180,9 +178,11 @@ const Second = () => {
     }, 500);
   };
   const handleElement = (element) => {
+    dispatch(removeGoal(element));
     setGoals(arrayRemove(goals, element));
   };
   const handleElementBottom = (element) => {
+    dispatch(removeObstacle(element));
     setObstacles(arrayRemove(obstacles, element));
   };
 
@@ -215,7 +215,7 @@ const Second = () => {
                 draggable="true"
                 onDragStart={(e) => handleDragStart(e, -1, -1, element)}
                 onDragOver={handleDragOver}
-                onDragEnd={(e) => handleDragEnd(e, element)}
+                onDragEnd={(e) => handleDragEnd(e)}
               >
                 {element}
               </button>
@@ -288,7 +288,7 @@ const Second = () => {
                 draggable="true"
                 onDragStart={(e) => handleDragStartBottom(e, -1, -1, element)}
                 onDragOver={handleDragOverBottom}
-                onDragEnd={(e) => handleDragEndBottom(e, element)}
+                onDragEnd={(e) => handleDragEndBottom(e)}
               >
                 {element}
               </button>

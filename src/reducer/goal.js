@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+function arrayRemove(arr, value) {
+  return arr.filter(function (ele) {
+    return ele !== value;
+  });
+}
 const initialState = {
   value: [
     "Factor A",
@@ -22,9 +26,12 @@ export const Goal = createSlice({
         state.value.push(action.payload);
       }
     },
+    removeGoal: (state, action) => {
+      return { value: arrayRemove(state.value, action.payload) };
+    },
   },
 });
 
-export const { addGoal } = Goal.actions;
+export const { addGoal,removeGoal } = Goal.actions;
 
 export default Goal.reducer;

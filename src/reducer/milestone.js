@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+function arrayRemove(arr, value) {
+  return arr.filter(function (ele) {
+    return ele !== value;
+  });
+}
 const initialState = {
   value: [
     "Factor A",
@@ -22,9 +27,12 @@ export const Milestone = createSlice({
         state.value.push(action.payload);
       }
     },
+    removeMilestone: (state, action) => {
+      return { value: arrayRemove(state.value, action.payload) };
+    },
   },
 });
 
-export const { addMilestone } = Milestone.actions;
+export const { addMilestone, removeMilestone } = Milestone.actions;
 
 export default Milestone.reducer;

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+function arrayRemove(arr, value) {
+  return arr.filter(function (ele) {
+    return ele !== value;
+  });
+}
 const initialState = {
   value: [
     "Factor A",
@@ -22,9 +26,12 @@ export const Obstacle = createSlice({
         state.value.push(action.payload);
       }
     },
+    removeObstacle: (state, action) => {
+      return { value: arrayRemove(state.value, action.payload) };
+    },
   },
 });
 
-export const { addObstacle } = Obstacle.actions;
+export const { addObstacle, removeObstacle } = Obstacle.actions;
 
 export default Obstacle.reducer;

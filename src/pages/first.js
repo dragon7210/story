@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import { X1, X2, X } from "../constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addMilestone } from "../reducer/milestone";
-import { addChallenge } from "../reducer/challenge";
+import { addMilestone, removeMilestone } from "../reducer/milestone";
+import { addChallenge, removeChallenge } from "../reducer/challenge";
 import { addFirstTop } from "../reducer/firstTop";
 import { addFirstBottom } from "../reducer/firstBottom";
 import { useEffect, useState } from "react";
@@ -38,8 +38,8 @@ const First = () => {
   const [componentsBottom, setComponentsBottom] = useState([]);
   const [name, setName] = useState("");
   const [nameBottom, setNameBottom] = useState("");
-  const Milestones = useSelector((state) => state.Milestone).value;
-  const Chalstones = useSelector((state) => state.Challenge).value;
+  let Milestones = useSelector((state) => state.Milestone).value;
+  let Chalstones = useSelector((state) => state.Challenge).value;
 
   const [milestones, setMilestones] = useState(Milestones);
   const [chalstones, setChalstones] = useState(Chalstones);
@@ -56,6 +56,7 @@ const First = () => {
       if (!newComponents[row][col]) {
         newComponents[row][col] = [];
       }
+
       if (newComponents[row][col].length === 0) {
         newComponents[row][col].push(
           <button
@@ -110,8 +111,7 @@ const First = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  const handleDragEnd = (event, element) => {
-    handleElement(element);
+  const handleDragEnd = (event) => {
     event.target.style.opacity = 1;
     setTimeout(() => {
       setName("");
@@ -119,7 +119,6 @@ const First = () => {
       setDrag(false);
     }, 500);
   };
-
   const handleMoveBottom = (e, row, col) => {
     if (dragBottom) {
       const newComponents = componentsBottom.map((i) => i);
@@ -134,7 +133,7 @@ const First = () => {
           <button
             className="chalButton"
             draggable="true"
-            onDragStart={(e) => handleDragStartBottom(e, row, col, name)}
+            onDragStart={(e) => handleDragStartBottom(e, row, col, nameBottom)}
             onDragOver={handleDragOverBottom}
             onDragEnd={handleDragEndBottom}
             key={e}
@@ -172,9 +171,8 @@ const First = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  const handleDragEndBottom = (event, element) => {
+  const handleDragEndBottom = (event) => {
     event.target.style.opacity = 1;
-    handleElementBotton(element);
     setTimeout(() => {
       setNameBottom("");
       setDraggedItemBottom({ row: -1, col: -1 });
@@ -182,9 +180,11 @@ const First = () => {
     }, 500);
   };
   const handleElement = (element) => {
+    dispatch(removeMilestone(element));
     setMilestones(arrayRemove(milestones, element));
   };
   const handleElementBotton = (element) => {
+    dispatch(removeChallenge(element));
     setChalstones(arrayRemove(chalstones, element));
   };
 
@@ -216,7 +216,7 @@ const First = () => {
               draggable="true"
               onDragStart={(e) => handleDragStart(e, -1, -1, element)}
               onDragOver={handleDragOver}
-              onDragEnd={(e) => handleDragEnd(e, element)}
+              onDragEnd={(e) => handleDragEnd(e)}
             >
               {element}
             </button>
@@ -295,7 +295,7 @@ const First = () => {
                 draggable="true"
                 onDragStart={(e) => handleDragStartBottom(e, -1, -1, element)}
                 onDragOver={handleDragOverBottom}
-                onDragEnd={(e) => handleDragEndBottom(e, element)}
+                onDragEnd={(e) => handleDragEndBottom(e)}
               >
                 {element}
               </button>
