@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { X1 } from "../constant";
 import { addChangeChart } from "../reducer/changeChart";
 import { useNavigate } from "react-router-dom";
-import MSlider from "../components/MSlider";
+import MSlider from "../components/mslider";
 import Box from "@mui/material/Box";
 
 const Third = () => {
