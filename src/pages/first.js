@@ -252,7 +252,6 @@ const First = () => {
                   <td>{element}</td>
                   {temp.map((element) => (
                     <td
-                      style={{ width: "110px" }}
                       key={element}
                       onMouseOver={(e) => handelMoveTop(e, index, element)}
                     >
@@ -332,7 +331,6 @@ const First = () => {
                   <td>{element}</td>
                   {temp.map((element) => (
                     <td
-                      style={{ width: "110px" }}
                       key={element}
                       onMouseOver={(e) => handleMoveBottom(e, index, element)}
                     >

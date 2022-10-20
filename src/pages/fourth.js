@@ -25,7 +25,7 @@ const Fourth = () => {
               <tr>
                 <td className="w-10"></td>
                 {X.map((element) => (
-                  <td style={{ width: "110px" }} key={element}>
+                  <td key={element}>
                     {element === 1
                       ? "18-24years"
                       : element * 5 +
@@ -85,7 +85,7 @@ const Fourth = () => {
               <tr>
                 <td className="w-10"></td>
                 {X.map((element) => (
-                  <td key={element} style={{ width: "110px" }}>
+                  <td key={element}>
                     {element === 1
                       ? "18-24years"
                       : element * 5 +
