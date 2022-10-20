@@ -9,7 +9,19 @@ export const FirstTop = createSlice({
   initialState,
   reducers: {
     addFirstTop: (state, action) => {
-      state.value.push(action.payload);
+      let flag = true;
+      let newStateValue = state.value.map((element) => {
+        if (element.name === action.payload.name) {
+          flag = false;
+          return action.payload;
+        } else {
+          return element;
+        }
+      });
+      if (flag) {
+        newStateValue.push(action.payload);
+      }
+      return { value: newStateValue };
     },
   },
 });
