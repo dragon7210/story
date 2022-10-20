@@ -71,6 +71,8 @@ const First = () => {
           </button>
         );
         handleElement(name);
+      } else {
+        return;
       }
       if (draggedItem.row !== -1 && draggedItem.col !== -1) {
         newComponents[draggedItem.row][draggedItem.col].splice(0, 1);
@@ -143,6 +145,8 @@ const First = () => {
           </button>
         );
         handleElementBotton(nameBottom);
+      } else {
+        return;
       }
 
       if (draggedItemBottom.row !== -1 && draggedItemBottom.col !== -1) {
