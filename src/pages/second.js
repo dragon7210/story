@@ -66,7 +66,7 @@ const Second = () => {
       if (temp[row][col].length === 0) {
         temp[row][col].push(
           <button
-            className="mileButton"
+            className="mileButton1"
             draggable="true"
             onDragStart={(e) => handleDragStart(e, row, col, name)}
             onDragOver={handleDragOver}
@@ -134,7 +134,7 @@ const Second = () => {
       if (temp[row][col].length === 0) {
         temp[row][col].push(
           <button
-            className="chalButton"
+            className="chalButton1"
             draggable="true"
             onDragStart={(e) => handleDragStartBottom(e, row, col, nameBottom)}
             onDragOver={handleDragOverBottom}
