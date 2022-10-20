@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { X1, X } from "../constant";
+import { X1, X, X2 } from "../constant";
 
 const Fourth = () => {
   const [lastName, setLastName] = useState("");
@@ -98,7 +98,7 @@ const Fourth = () => {
               </tr>
             </thead>
             <tbody>
-              {X1.map((element, rowIndex) => (
+              {X2.map((element, rowIndex) => (
                 <tr key={rowIndex}>
                   <td>{element}</td>
                   {X.map((colIndex) => (
